@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Message;
 
 class Room extends Model
 {
@@ -12,5 +13,10 @@ class Room extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }
