@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Room;
 
-class HomeController extends Controller
+class ChatController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $rooms = Room::get();
+        return view('chat', compact('rooms'));
+    }
+
+    public function show(Room $room)
+    {
+        return view('chat.room', compact('room'));
     }
 }
