@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Chat;
 use App\Models\Room;
 use Livewire\Component;
+use App\Events\Chat\MessageAdded;
 
 class NewMessage extends Component
 {
@@ -22,6 +23,9 @@ class NewMessage extends Component
         ]);
 
         $this->emit('message.added', $message->id);
+
+        broadcast(new MessageAdded($this->room, $message))->toOthers();
+
         $this->body = '';
     }
 
